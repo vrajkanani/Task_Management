@@ -9,9 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-        options.LoginPath = "/User/UserLogin"; // Redirect if not authenticated
-        options.LogoutPath = "/User/logout";   // Logout path
-        options.ExpireTimeSpan = TimeSpan.FromDays(7); // Default expiration time
+        options.LoginPath = "/Account/LoginPage"; // Placeholder for login path
+        options.LogoutPath = "/Account/LogoutPage"; // Placeholder for logout path
+        options.ExpireTimeSpan = TimeSpan.FromDays(7); // Session expiration (unchanged)
         options.SlidingExpiration = true; // Renew expiration automatically
     });
 
@@ -24,20 +24,20 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddFluentValidationAutoValidation()
                 .AddFluentValidationClientsideAdapters();
 
-// Register validators from the current assembly
+// Register validators from current assembly
 builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
-// Login
+// Session & Context
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSession();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configure HTTP request pipeline
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
+    app.UseExceptionHandler("/Shared/ErrorPage"); // Placeholder error handler
 }
 
 app.UseSession();
@@ -47,7 +47,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Main}/{action=Start}/{id?}"); // Placeholder route
 
 app.Run();
-
