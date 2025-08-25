@@ -1,0 +1,103 @@
+﻿@model List<Task_Management.Models.CompleteSubTaskModel>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Subtask History</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container mt-5 p-4 rounded">
+        <h1 class="text-center mb-4">Complete Subtask History</h1>
+        <div class="d-flex justify-content-end mb-3">
+            <a asp-controller="SubTask" asp-action="SubTaskList" class="btn btn-primary me-2">
+                Go To All SubTasks
+            </a>
+            <form id="clear-all-complete-subtasks-form" asp-action="ClearAll" method="post">
+                <button type="button" class="btn btn-danger" onclick="confirmClearAllCompleteSubtasks()">
+                    Clear All Complete Subtasks
+                </button>
+
+            </form>
+        </div>
+
+        @if (TempData["Message"] != null)
+        {
+            <div id="successMessage" class="alert alert-success" role="alert">
+                @TempData["Message"]
+            </div>
+        }
+
+        @if (Model != null && Model.Count > 0)
+        {
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Due Date</th>
+                            <th>Priority</th>
+                            <th>Created At</th>
+                            <th>Completed At</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var subTask in Model)
+                        {
+                            <tr>
+                                <td>@subTask.Title</td>
+                                <td>@subTask.Description</td>
+                                <td>@subTask.DueDate?.ToString("dd-MM-yyyy")</td>
+                                <td>
+                                    @(subTask.Priority == 0 ? "Low" : subTask.Priority == 1 ? "Medium" : subTask.Priority == 2 ? "High" : "Unknown")
+                                </td>
+                                <td>@subTask.CreatedAt.ToString("dd-MM-yyyy")</td>
+                                <td>@subTask.CompletedAt.ToString("dd-MM-yyyy")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-warning mt-4" role="alert">
+                No complete subtasks found.
+            </div>
+        }
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const successMessage = document.getElementById("successMessage");
+            if (successMessage) {
+                setTimeout(() => {
+                    successMessage.style.display = "none";
+                }, 3000);
+            }
+        });
+    </script>
+    <script>
+        // ClearAllCompleteSubtasks button
+        function confirmClearAllCompleteSubtasks() {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'Do you want to clear all complete subtasks?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, clear all!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('clear-all-complete-subtasks-form').submit();
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>

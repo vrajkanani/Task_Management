@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskMaster - Your Productivity Partner</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .hero-section {
+            height: 70vh;
+            background: url('https://collzy.com/wp-content/uploads/2022/11/chart-graph-business-finance.jpg') no-repeat center center;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+            position: relative;
+        }
+
+            .hero-section::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+            }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .features-section {
+            padding: 4rem 0;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="container-fluid hero-section">
+        <div class="hero-content">
+            <h1 class="display-4">Welcome to TaskManagement</h1>
+            <p class="lead">Efficiently manage your tasks and boost your productivity.</p>
+            <a asp-controller="ToDoList" asp-action="AddEditTask" class="btn btn-primary btn-lg">Get Started</a>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="container features-section text-center">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="feature-icon mb-3">
+                    <i class="fas fa-tasks"></i>
+                </div>
+                <h5>Organize Tasks</h5>
+                <p>Keep all your tasks organized in one place with our intuitive interface.</p>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-icon mb-3">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h5>Collaborate</h5>
+                <p>Work seamlessly with your team and stay updated with real-time collaboration.</p>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-icon mb-3">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h5>Track Progress</h5>
+                <p>Monitor your progress with detailed analytics and stay on top of your goals.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    @* <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script> *@
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Font Awesome for icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</body>
+</html>

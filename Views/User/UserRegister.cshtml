@@ -1,0 +1,223 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_Register.cshtml";
+}
+
+@model Task_Management.Models.UserRegisterModel
+
+@if (TempData["ErrorMassage"] != null)
+{
+    <script>
+        Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "@TempData["ErrorMassage"]",
+        });
+    </script>
+}
+<main>
+    <div class="container">
+
+        <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+                        <h3 class="card-title">Task_Management</h3>
+
+                        <div class="card mb-3 border border-1">
+
+                            <div class="card-body">
+
+                                <div class="pt-4 pb-2">
+                                    <h5 class="card-title text-center pb-0 fs-4">Create an Account</h5>
+                                    <p class="text-center small">Enter your personal details to create account</p>
+                                </div>
+
+                                <form class="row g-3 needs-validation" asp-controller="User" asp-action="UserRegister" novalidate>
+                                    <div class="col-12">
+                                        <label for="UserName" class="form-label">UserName</label>
+                                        <input type="text" asp-for="UserName" class="form-control" id="UserName">
+                                        <span class="text-danger" asp-validation-for="UserName"></span>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="Password" class="form-label ">Password</label>
+                                        <input type="password" asp-for="Password" class="form-control" id="Password">
+                                        <span class="text-danger" asp-validation-for="Password"></span>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="Email" class="form-label">Email</label>
+                                        <input type="email" asp-for="Email" class="form-control" id="Email">
+                                        <span class="text-danger" asp-validation-for="Email"></span>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="MobileNo" class="form-label">Mobile Number</label>
+                                        <input type="number" asp-for="MobileNo" class="form-control" id="MobileNo">
+                                        <span class="text-danger" asp-validation-for="MobileNo"></span>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="form-floating mb-3">
+                                            <select class="form-select" asp-for="Role" aria-label="Role">
+                                                <option value=true>Admin</option>
+                                                <option value=false>User</option>
+                                            </select>
+                                            <label for="Role">Role : </label>
+                                            <span asp-validation-for="Role" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="form-check">
+											<input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>
+                                            <label class="form-check-label" for="acceptTerms">I agree and accept the <a class="text-decoration-none card-title" href="#">terms and conditions</a></label>
+                                            <div class="invalid-feedback">You must agree before submitting.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <button class="btn btn-info w-100" type="submit">Create Account</button>
+                                    </div>
+                                    <div class="col-12">
+                                        <p class="small mb-0">Already have an account? <a class="text-decoration-none card-title" asp-controller="User" asp-action="UserLogin">Log in</a></p>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+</main><!-- End #main -->
+    <script src="jquery-3.7.1.min.js" ></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+} 
+
+
+@* 
+@{
+    Layout = "~/Views/Shared/_Layout_Register.cshtml";
+}
+
+@model Task_Management.Models.UserRegisterModel
+
+@if (TempData["ErrorMassage"] != null)
+{
+    <script>
+        Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "@TempData["ErrorMassage"]",
+        });
+    </script>
+}
+@if (TempData["SuccessMassage"] != null)
+{
+    <script>
+        Swal.fire({
+            title: "Good job!",
+            text: "@TempData["SuccessMassage"]",
+            icon: "success"
+        }).then(function () {
+            window.location.href = '@Url.Action("UserLogin", "User")';
+        });
+    </script>
+} 
+<main>
+    <div class="container">
+
+        <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+                        <h3>Task_Management</h3>
+
+                        <div class="card mb-3 border border-1">
+
+                            <div class="card-body">
+
+                                <div class="pt-4 pb-2">
+                                    <h5 class="card-title text-center pb-0 fs-4">Create an Account</h5>
+                                    <p class="text-center small">Enter your personal details to create account</p>
+                                </div>
+
+                                <form class="row g-3 needs-validation" asp-controller="User" asp-action="UserRegister" novalidate>
+                                    <div class="col-12">
+                                        <label for="UserName" class="form-label">UserName</label>
+                                        <input type="text" asp-for="UserName" class="form-control" id="UserName">
+                                        <span class="text-danger" asp-validation-for="UserName"></span>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="Password" class="form-label">Password</label>
+                                        <input type="password" asp-for="Password" class="form-control" id="Password">
+                                        <span class="text-danger" asp-validation-for="Password"></span>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="Email" class="form-label">Email</label>
+                                        <input type="email" asp-for="Email" class="form-control" id="Email">
+                                        <span class="text-danger" asp-validation-for="Email"></span>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="MobileNo" class="form-label">Mobile Number</label>
+                                        <input type="number" asp-for="MobileNo" class="form-control" id="MobileNo">
+                                        <span class="text-danger" asp-validation-for="MobileNo"></span>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="Role" class="form-label ">Role</label>
+                                        <div class="mb-3">
+                                            <select class="form-select " asp-for="Role" aria-label="Role">
+                                                <option value=true>Admin</option>
+                                                <option value=false>User</option>
+                                            </select>
+                                            <span asp-validation-for="Role" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>
+                                            <label class="form-check-label" for="acceptTerms">I agree and accept the <a class="text-decoration-none text-danger" href="#">terms and conditions</a></label>
+                                            <div class="invalid-feedback text-white">You must agree before submitting.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <button class="btn btn-danger w-100" type="submit">Create Account</button>
+                                    </div>
+                                    <div class="col-12">
+                                        <p class="small mb-0 ">Already have an account? <a class="text-decoration-none " asp-controller="User" asp-action="UserLogin">Log in</a></p>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+</main><!-- End #main -->
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+} *@

@@ -1,0 +1,77 @@
+﻿@model Task_Management.Models.SubTaskModel
+
+<div class="pagetitle">
+    <h1>Task Management System</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+            <li class="breadcrumb-item">Table</li>
+            <li class="breadcrumb-item active">SubTasks</li>
+        </ol>
+    </nav>
+</div>
+
+<section class="section">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">@((Model.SubTaskId == 0) ? "Add SubTask" : "Edit SubTask")</h5>
+
+                    <form class="row g-3" asp-controller="SubTask" asp-action="SaveSubTask">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        @Html.HiddenFor(h => h.SubTaskId)
+
+                        <div class="col-12">
+                            <label class="form-label">Main Task</label>
+                            <select class="form-select" asp-for="MainTaskId" asp-items="@(new SelectList(ViewBag.TaskList, "Id", "Title"))">
+                                <option value="">Select Main Task</option>
+                            </select>
+                            <span asp-validation-for="MainTaskId" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label">Title</label>
+                            <input type="text" asp-for="Title" class="form-control">
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label">Description</label>
+                            <textarea asp-for="Description" rows="4" class="form-control"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label">Due Date</label>
+                            <input type="date" asp-for="DueDate" class="form-control">
+                            <span asp-validation-for="DueDate" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label">Priority</label>
+                            <select asp-for="Priority" class="form-select">
+                                <option value="0">Low</option>
+                                <option value="1">Medium</option>
+                                <option value="2">High</option>
+                            </select>
+                            <span asp-validation-for="Priority" class="text-danger"></span>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="reset" class="btn btn-secondary">Reset</button>
+                            <a href="@Url.Action("SubTaskList", "SubTask")" class="btn btn-dark">Back</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
