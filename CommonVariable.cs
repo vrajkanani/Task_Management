@@ -2,44 +2,41 @@
 {
     public class CommonVariable
     {
-        private static IHttpContextAccessor _HttpContextAccessor;
+        private static IHttpContextAccessor _HiddenContextAccessor;
 
         static CommonVariable()
         {
-            _HttpContextAccessor = new HttpContextAccessor();
+            _HiddenContextAccessor = new HttpContextAccessor();
         }
-
 
         public static int? UserID()
         {
-
-            if (_HttpContextAccessor.HttpContext.Session.GetString("UserID") == null)
+            if (_HiddenContextAccessor.HttpContext.Session.GetString("Random_UserKey") == null)
             {
                 return null;
             }
 
-            return Convert.ToInt32(_HttpContextAccessor.HttpContext.Session.GetString("UserID"));
+            return Convert.ToInt32(_HiddenContextAccessor.HttpContext.Session.GetString("Random_UserKey"));
         }
 
         public static string UserName()
         {
-            if (_HttpContextAccessor.HttpContext.Session.GetString("UserName") == null)
+            if (_HiddenContextAccessor.HttpContext.Session.GetString("Random_NameKey") == null)
             {
                 return null;
             }
 
-            return _HttpContextAccessor.HttpContext.Session.GetString("UserName");
+            return _HiddenContextAccessor.HttpContext.Session.GetString("Random_NameKey");
         }
 
         public static bool? Role()
         {
-
-            if (_HttpContextAccessor.HttpContext.Session.GetString("Role") == null)
+            if (_HiddenContextAccessor.HttpContext.Session.GetString("Random_RoleKey") == null)
             {
                 return null;
             }
 
-            return Convert.ToBoolean(_HttpContextAccessor.HttpContext.Session.GetString("Role"));
+            return Convert.ToBoolean(_HiddenContextAccessor.HttpContext.Session.GetString("Random_RoleKey"));
         }
     }
 }
